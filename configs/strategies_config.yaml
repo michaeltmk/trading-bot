@@ -1,0 +1,15 @@
+ma_in_sequence:
+  id: ma_in_sequence
+  name: MA in sequence
+martingale:
+  FirstEntryLotsSize: 0.05
+  LotExponent: 1.2
+  Level1PipsStep: 30
+  Level2PipsStep: 60
+  Level3PipsStep: 120
+  Level4PipsStep: 200
+  Level5PipsStep: 360
+  Level6PipsStep: 500
+  Level7PipsStep: 750
+  SLInLevel: 9
+  TotalLevels: 8

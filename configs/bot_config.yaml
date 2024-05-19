@@ -1,0 +1,10 @@
+scheduler:
+  tasks:
+    - name: "task1"
+      task_type: "scheduled"
+      schedule: "0 8 * * *"
+      command: "python3 scripts/task1.py"
+    - name: "task2"
+      task_type: "scheduled"
+      schedule: "0 9 * * *"
+      command: "python3 scripts/task2.py"
