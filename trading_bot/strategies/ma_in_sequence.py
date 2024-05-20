@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from . import *
+from .base_class import StrategyBaseClass, StrategyInputBaseModel, StrategyActionBaseModel, ActionTypes
 from datetime import datetime as dt
 
 class MaInSequenceConfigModel(BaseModel):
@@ -11,7 +11,7 @@ class MaInSequenceIndecatorsModel(BaseModel):
     upper_ma_trend: float
     wave_ma: float
     killer_ma: float
-    basic_ma_shift: float
+    enter_ma: float
 
 class MaInSequenceInputModel(StrategyInputBaseModel):
     indecators: MaInSequenceIndecatorsModel
@@ -20,24 +20,14 @@ class MaInSequenceClass(StrategyBaseClass):
     def __init__(self, config: dict):
         self.config = MaInSequenceConfigModel(**config)
         # define the strategy parameters
-        self.indecators = {
-            "H1": {"lower_ma_trend": {
-                "indecator": "MA",
-                "period": 144},
-                "upper_ma_trend": {
-                "indecator": "MA",
-                "period": 169},
-                "wave_ma": {
-                "indecator": "MA",
-                "period": 34},
-                "killer_ma": {
-                "indecator": "MA",
-                "period": 12},
-                "basic_ma_shift": {
-                "indecator": "MA",
-                "period": 1},
-                }
-        }
+        self.indecators = [
+                    {"indecator": "MA", "period": 144, "shift": 1, "name": "lower_ma_trend", "timeframe": "H1"},
+                    {"indecator": "MA", "period": 169, "shift": 1, "name": "upper_ma_trend", "timeframe": "H1"},
+                    {"indecator": "MA", "period": 34, "shift": 1, "name": "wave_ma", "timeframe": "H1"},
+                    {"indecator": "MA", "period": 12, "shift": 1, "name": "killer_ma", "timeframe": "H1"},
+                    {"indecator": "MA", "period": 3, "shift": 1, "name": "enter_ma", "timeframe": "M30"}
+                ]
+
     
 
     def calculate(self, input: dict) -> StrategyActionBaseModel:
@@ -55,14 +45,14 @@ class MaInSequenceClass(StrategyBaseClass):
             )
             
         # calculate the strategy
-        if data.basic_ma_shift > data.killer_ma and data.killer_ma > data.wave_ma and data.wave_ma > data.lower_ma_trend and data.lower_ma_trend > data.upper_ma_trend:
+        if data.enter_ma > data.killer_ma and data.killer_ma > data.wave_ma and data.wave_ma > data.lower_ma_trend and data.lower_ma_trend > data.upper_ma_trend:
             return StrategyActionBaseModel(
                 action=ActionTypes.BUY,
                 price=input.price,
                 time=dt.now(),
                 amount=1000                
             )
-        elif data.basic_ma_shift < data.killer_ma and data.killer_ma < data.wave_ma and data.wave_ma < data.lower_ma_trend and data.lower_ma_trend < data.upper_ma_trend:
+        elif data.enter_ma < data.killer_ma and data.killer_ma < data.wave_ma and data.wave_ma < data.lower_ma_trend and data.lower_ma_trend < data.upper_ma_trend:
             return StrategyActionBaseModel(
                 action=ActionTypes.SELL,
                 price=input.price,

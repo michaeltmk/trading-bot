@@ -1,28 +1,28 @@
-from indecators import IndecatorTypes
-from . import *
-from pydentic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from datetime import datetime
+from typing import List, Optional
+from enum import Enum
 
-class ActionTypes():
+class ActionTypes(str, Enum):
     BUY = "BUY"
     SELL = "SELL"
     HOLD = "HOLD"
     CLOSE = "CLOSE"
 
 class StrategyActionBaseModel(BaseModel):
-    action: ActionTypes
-    price: float
-    time: datetime
-    amount: float
+    action: Optional[ActionTypes] = None
+    price: float = 0
+    time: datetime = datetime.now()
+    amount: float = 0
 
 class OrderSummaryBaseModel(BaseModel):
-    long_order: bool
-    total_profit: float
-    total_amount: float
+    long_order: Optional[bool] = None
+    total_profit: Optional[float] = 0
+    total_amount: Optional[float] = 0
 
 class StrategyHistoryBaseModel(BaseModel):
-    orders: list[StrategyActionBaseModel]
-    summary: OrderSummaryBaseModel
+    orders: Optional[List[StrategyActionBaseModel]] = []
+    summary: Optional[OrderSummaryBaseModel] = OrderSummaryBaseModel()
 
 
 class StrategyConfigBaseModel(BaseModel):

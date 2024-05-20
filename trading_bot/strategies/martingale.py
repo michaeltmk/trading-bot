@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from . import *
+from .base_class import StrategyBaseClass, StrategyInputBaseModel, StrategyActionBaseModel, ActionTypes
 from datetime import datetime as dt
 
 class MartingaleConfigModel(BaseModel):
