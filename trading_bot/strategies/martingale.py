@@ -28,9 +28,9 @@ class MartingaleClass(StrategyBaseClass):
         self.indecators = {}
     
 
-    def calculate(self, input: dict) -> StrategyActionBaseModel:
+    def calculate(self, input_dict: dict) -> StrategyActionBaseModel:
         # schema validation
-        input = MartingaleInputModel(**input)
+        input = MartingaleInputModel(**input_dict)
         
         # this is a open second order strategy, so we need to check if the first order is already opened
         if input.history.orders.len() == 0:
@@ -50,14 +50,14 @@ class MartingaleClass(StrategyBaseClass):
             )
         
         # calculate the strategy
-        if input.price < input.current_action.price and input.current_action.action == ActionTypes.BUY:
+        if input.price < input.decision_making.price and input.decision_making.action == ActionTypes.BUY:
             return StrategyActionBaseModel(
                 action=ActionTypes.BUY,
                 price=input.price,
                 time=dt.now(),
                 amount=1000                
             )
-        elif input.price > input.current_action.price and input.current_action.action == ActionTypes.SELL:
+        elif input.price > input.decision_making.price and input.decision_making.action == ActionTypes.SELL:
             return StrategyActionBaseModel(
                 action=ActionTypes.SELL,
                 price=input.price,

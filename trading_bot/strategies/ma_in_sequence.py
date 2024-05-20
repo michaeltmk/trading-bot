@@ -30,9 +30,9 @@ class MaInSequenceClass(StrategyBaseClass):
 
     
 
-    def calculate(self, input: dict) -> StrategyActionBaseModel:
+    def calculate(self, input_dict: dict) -> StrategyActionBaseModel:
         # schema validation
-        input = MaInSequenceInputModel(**input)
+        input = MaInSequenceInputModel(**input_dict)
         data = input.indecators
 
         # this is a open order strategy, so we need to check if the order is already opened

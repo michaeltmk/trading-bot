@@ -8,6 +8,12 @@ class ActionTypes(str, Enum):
     SELL = "SELL"
     HOLD = "HOLD"
     CLOSE = "CLOSE"
+    BUY_LIMIT = "BUY_LIMIT"
+    SELL_LIMIT = "SELL_LIMIT"
+    BUY_STOP = "BUY_STOP"
+    SELL_STOP = "SELL_STOP"
+    BUY_STOP_LIMIT = "BUY_STOP_LIMIT"
+    SELL_STOP_LIMIT = "SELL_STOP_LIMIT"
 
 class StrategyActionBaseModel(BaseModel):
     action: Optional[ActionTypes] = None
@@ -34,7 +40,7 @@ class StrategyIndecatorsBaseModel(BaseModel):
 class StrategyInputBaseModel(BaseModel):
     indecators: StrategyIndecatorsBaseModel # should be defined in the strategy class
     history: StrategyHistoryBaseModel
-    current_action: StrategyActionBaseModel
+    decision_making: StrategyActionBaseModel
     target: str
     price: float
 
