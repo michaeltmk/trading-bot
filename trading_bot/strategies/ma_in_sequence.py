@@ -1,12 +1,12 @@
 from pydantic import BaseModel
-from .base_class import StrategyBaseClass, StrategyInputBaseModel, StrategyActionBaseModel, ActionTypes
+from .base_class import *
 from datetime import datetime as dt
 
-class MaInSequenceConfigModel(BaseModel):
+class MaInSequenceConfigModel(StrategyConfigBaseModel):
     id: int
     name: str = 'Jane Doe'
 
-class MaInSequenceIndecatorsModel(BaseModel):
+class MaInSequenceIndecatorsModel(StrategyIndecatorsBaseModel):
     lower_ma_trend: float
     upper_ma_trend: float
     wave_ma: float

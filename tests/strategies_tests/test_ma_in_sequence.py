@@ -4,6 +4,7 @@ def test_ma_in_sequence_buy_signal_no_order_opened():
     config = {
         "name": "ma_in_sequence",
         "id": 1,
+        "frequency_in_sec": 60
     }
     strategy = strategies.get_strategies("ma_in_sequence")(config)
     input = {
@@ -19,7 +20,7 @@ def test_ma_in_sequence_buy_signal_no_order_opened():
             "summary": {
             }
         },
-        "current_action": {
+        "decision_making": {
         },
         "target": "EURUSD",
         "price": 1

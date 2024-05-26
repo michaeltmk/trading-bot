@@ -23,8 +23,9 @@ class StrategyActionBaseModel(BaseModel):
 
 class OrderSummaryBaseModel(BaseModel):
     long_order: Optional[bool] = None
-    total_profit: Optional[float] = 0
+    max_profit: Optional[float] = 0
     total_amount: Optional[float] = 0
+    average_price: Optional[float] = 0
 
 class StrategyHistoryBaseModel(BaseModel):
     orders: Optional[List[StrategyActionBaseModel]] = []
@@ -32,7 +33,7 @@ class StrategyHistoryBaseModel(BaseModel):
 
 
 class StrategyConfigBaseModel(BaseModel):
-    pass # should be defined in the strategy class
+    frequency_in_sec: int = 1
 
 class StrategyIndecatorsBaseModel(BaseModel):
     pass # should be defined in the strategy class
