@@ -1,6 +1,7 @@
 from . import strategies
 import asyncio 
-from apscheduler import AsyncScheduler
+# from apscheduler import AsyncScheduler # for apscheduler 4
+from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
 class data_fetcher:
     def __init__(self):
@@ -45,7 +46,13 @@ if __name__ == '__main__':
     signal_generator_1.append('trailing_stop_orders')
 
     async def bot_1():
-        async with AsyncScheduler() as scheduler:
-            scheduler.append(60, signal_generator_1)
-            await scheduler.start_in_background()
+        # async with AsyncScheduler() as scheduler:
+        #     scheduler.append(60, signal_generator_1)
+        #     await scheduler.start_in_background()
+        scheduler = AsyncIOScheduler()
+        scheduler.add_job(signal_generator_1, 'interval', seconds=3)
+        scheduler.start()
+        while True:
+            await asyncio.sleep(1000)
+
     asyncio.run(bot_1())
