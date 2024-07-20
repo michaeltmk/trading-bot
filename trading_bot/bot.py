@@ -2,7 +2,8 @@ from . import strategies
 import asyncio 
 # from apscheduler import AsyncScheduler # for apscheduler 4
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
-
+from strategies import StrategyBaseClass
+from typing import List
 class data_fetcher:
     def __init__(self):
         pass
@@ -13,16 +14,16 @@ class data_fetcher:
 
 class signal_generator:
     def __init__(self):
-        self.strategies = []
+        self.strategies: List[StrategyBaseClass]  = []
         
-    def append(self, strategy_name: str):
-        self.strategies.append(strategies.get_strategies(strategy_name))
+    def append(self, strategy_name: str, config: dict):
+        self.strategies.append(strategies.get_strategies(strategy_name)(config))
 
-    def run(self):
+    def run(self,strategies_inputs: dict):
         for strategy in self.strategies:
             # TODO: get input from exchange
-            input_data = {}
-            strategy.calculate(input_data)
+            strategy_input = strategies_inputs[strategy.config.name]
+            strategy.calculate(strategy_input)
 
 # class scheduler:
 #     def __init__(self):
@@ -42,8 +43,8 @@ class signal_generator:
 
 if __name__ == '__main__':
     signal_generator_1 = signal_generator()
-    signal_generator_1.append('ma_in_sequence')
-    signal_generator_1.append('trailing_stop_orders')
+    signal_generator_1.append('ma_in_sequence',{})
+    signal_generator_1.append('trailing_stop_orders',{})
 
     async def bot_1():
         # async with AsyncScheduler() as scheduler:
