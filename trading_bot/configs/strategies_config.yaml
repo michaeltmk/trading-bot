@@ -1,6 +1,5 @@
 ma_in_sequence:
-  id: ma_in_sequence
-  name: MA in sequence
+  frequency_in_sec: 60
 martingale:
   FirstEntryLotsSize: 0.05
   LotExponent: 1.2
@@ -13,3 +12,12 @@ martingale:
   Level7PipsStep: 750
   SLInLevel: 9
   TotalLevels: 8
+  frequency_in_sec: 60
+trailing_stop_orders:
+  frequency_in_sec: 60
+  stop_loss_in_fix_dollars: 0
+  trailing_start_in_dollars: 1
+  trailing_distance_in_dollars: 1
+  breakeven_start_in_dollars: 0
+  breakeven_distance_in_dollars: 0
+  take_profit_in_dollars: 10
