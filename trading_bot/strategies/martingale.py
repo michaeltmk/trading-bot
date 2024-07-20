@@ -1,8 +1,7 @@
-from pydantic import BaseModel
-from .base_class import StrategyBaseClass, StrategyInputBaseModel, StrategyActionBaseModel, ActionTypes
+from .base_class import *
 from datetime import datetime as dt
 
-class MartingaleConfigModel(BaseModel):
+class MartingaleConfigModel(StrategyConfigBaseModel):
     FirstEntryLotsSize: float
     LotExponent: float
     Level1PipsStep: float
@@ -15,7 +14,7 @@ class MartingaleConfigModel(BaseModel):
     SLInLevel: float
     TotalLevels: float
 
-class MartingaleIndecatorsModel(BaseModel):
+class MartingaleIndecatorsModel(StrategyIndecatorsBaseModel):
     pass # no indecators for this strategy
 
 class MartingaleInputModel(StrategyInputBaseModel):

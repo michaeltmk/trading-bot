@@ -1,10 +1,9 @@
-from pydantic import BaseModel
 from .base_class import *
 from datetime import datetime as dt
 
 class MaInSequenceConfigModel(StrategyConfigBaseModel):
     id: int
-    name: str = 'Jane Doe'
+    name: str = 'ma_in_sequence'
 
 class MaInSequenceIndecatorsModel(StrategyIndecatorsBaseModel):
     lower_ma_trend: float

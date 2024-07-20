@@ -1,4 +1,3 @@
-from pydantic import BaseModel
 from .base_class import *
 from datetime import datetime as dt
 
@@ -57,23 +56,16 @@ class TrailingStopOrdersClass(StrategyBaseClass):
                 time=dt.now(),
                 amount=input.history.summary.total_amount                
             )
-        if input.history.summary.long_order:
-            if profit > 0:
-                if max_profit >= self.config.trailing_start_in_dollars:
-                    if max_profit - profit >= self.config.trailing_distance_in_dollars:
-                        return StrategyActionBaseModel(
-                            action=ActionTypes.CLOSE,
-                            price=input.price,
-                            time=dt.now(),
-                            amount=input.history.summary.total_amount                
-                        )
-                    else:
-                        return StrategyActionBaseModel(
-                            action=ActionTypes.HOLD,
-                            price=input.price,
-                            time=dt.now(),
-                            amount=0                
-                        )
+        # if input.history.summary.long_order:
+        if profit > 0:
+            if max_profit >= self.config.trailing_start_in_dollars:
+                if max_profit - profit >= self.config.trailing_distance_in_dollars:
+                    return StrategyActionBaseModel(
+                        action=ActionTypes.CLOSE,
+                        price=input.price,
+                        time=dt.now(),
+                        amount=input.history.summary.total_amount                
+                    )
                 else:
                     return StrategyActionBaseModel(
                         action=ActionTypes.HOLD,
@@ -82,21 +74,21 @@ class TrailingStopOrdersClass(StrategyBaseClass):
                         amount=0                
                     )
             else:
-                if -profit >= self.config.breakeven_start_in_dollars:
-                    if -profit - self.config.breakeven_distance_in_dollars >= 0:
-                        return StrategyActionBaseModel(
-                            action=ActionTypes.CLOSE,
-                            price=input.price,
-                            time=dt.now(),
-                            amount=input.history.summary.total_amount                
-                        )
-                    else:
-                        return StrategyActionBaseModel(
-                            action=ActionTypes.HOLD,
-                            price=input.price,
-                            time=dt.now(),
-                            amount=0                
-                        )
+                return StrategyActionBaseModel(
+                    action=ActionTypes.HOLD,
+                    price=input.price,
+                    time=dt.now(),
+                    amount=0                
+                )
+        else:
+            if -profit >= self.config.breakeven_start_in_dollars:
+                if -profit - self.config.breakeven_distance_in_dollars >= 0:
+                    return StrategyActionBaseModel(
+                        action=ActionTypes.CLOSE,
+                        price=input.price,
+                        time=dt.now(),
+                        amount=input.history.summary.total_amount                
+                    )
                 else:
                     return StrategyActionBaseModel(
                         action=ActionTypes.HOLD,
@@ -104,3 +96,10 @@ class TrailingStopOrdersClass(StrategyBaseClass):
                         time=dt.now(),
                         amount=0                
                     )
+            else:
+                return StrategyActionBaseModel(
+                    action=ActionTypes.HOLD,
+                    price=input.price,
+                    time=dt.now(),
+                    amount=0                
+                )
