@@ -8,7 +8,7 @@ import asyncio
 def anyio_backend():
     return 'asyncio'
 
-async def _test_bot():
+async def _test_bot(anyio_backend):
     signal_generator_1 = signal_generator()
     signal_generator_1.append('ma_in_sequence')
     signal_generator_1.append('trailing_stop_orders')
@@ -18,15 +18,8 @@ async def _test_bot():
         scheduler_1.append(60, signal_generator_1)
         scheduler_1.run()
 
-async def test_main2(anyio_backend):
+def test_main2():
     signal_generator_1 = signal_generator()
     signal_generator_1.append('ma_in_sequence')
     signal_generator_1.append('trailing_stop_orders')
-
-    scheduler = AsyncIOScheduler()
-    scheduler.add_job(signal_generator_1.run, 'interval', seconds=3)
-    scheduler.start()
-    while True:
-        await asyncio.sleep(1000)
-
-    asyncio.run(bot_1())
+    signal_generator_1.run()

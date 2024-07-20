@@ -1,4 +1,5 @@
 import trading_bot.strategies as strategies
+from trading_bot.strategies import StrategyBaseClass
 
 def test_trailing_stop_orders_close_order_profit_taken():
     config = {
@@ -10,7 +11,7 @@ def test_trailing_stop_orders_close_order_profit_taken():
         "breakeven_distance_in_dollars": 0,
         "take_profit_in_dollars": 10
     }
-    strategy = strategies.get_strategies("trailing_stop_orders")(config)
+    strategy: StrategyBaseClass = strategies.get_strategies("trailing_stop_orders")(config)
     input = {
         "indecators": {},
         "history": {

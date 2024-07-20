@@ -1,4 +1,5 @@
 import trading_bot.strategies as strategies
+from trading_bot.strategies import StrategyBaseClass
 
 def test_ma_in_sequence_buy_signal_no_order_opened():
     config = {
@@ -6,7 +7,7 @@ def test_ma_in_sequence_buy_signal_no_order_opened():
         "id": 1,
         "frequency_in_sec": 60
     }
-    strategy = strategies.get_strategies("ma_in_sequence")(config)
+    strategy: StrategyBaseClass = strategies.get_strategies("ma_in_sequence")(config)
     input = {
         "indecators": {
             "lower_ma_trend": 2,
