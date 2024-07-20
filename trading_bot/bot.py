@@ -2,7 +2,6 @@ from . import strategies
 import asyncio 
 # from apscheduler import AsyncScheduler # for apscheduler 4
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
-from strategies import StrategyBaseClass
 from typing import List
 class data_fetcher:
     def __init__(self):
@@ -14,7 +13,7 @@ class data_fetcher:
 
 class signal_generator:
     def __init__(self):
-        self.strategies: List[StrategyBaseClass]  = []
+        self.strategies: List[strategies.StrategyBaseClass]  = []
         
     def append(self, strategy_name: str, config: dict):
         self.strategies.append(strategies.get_strategies(strategy_name)(config))

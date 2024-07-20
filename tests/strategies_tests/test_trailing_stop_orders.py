@@ -1,5 +1,5 @@
-import trading_bot.strategies as strategies
-from trading_bot.strategies import StrategyBaseClass
+import trading_bot.src.strategies as strategies
+from trading_bot.src.strategies import StrategyBaseClass
 
 def test_trailing_stop_orders_close_order_profit_taken():
     config = {

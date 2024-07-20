@@ -1,6 +1,6 @@
 from typing import Type
 
-from trading_bot.strategies.base_class import StrategyBaseClass
+from .base_class import StrategyBaseClass
 from .ma_in_sequence import MaInSequenceClass
 from .martingale import MartingaleClass
 from .trailing_stop_orders import TrailingStopOrdersClass

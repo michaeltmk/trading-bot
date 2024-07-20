@@ -1,5 +1,5 @@
-import trading_bot.strategies as strategies
-from trading_bot.strategies import StrategyBaseClass
+import trading_bot.src.strategies as strategies
+from trading_bot.src.strategies import StrategyBaseClass
 
 def test_ma_in_sequence_buy_signal_no_order_opened():
     config = {
