@@ -1,8 +1,11 @@
-from .ma_in_sequence import *
-from .martingale import *
-from .trailing_stop_orders import *
+from typing import Type
 
-def get_strategies(name: str):
+from trading_bot.strategies.base_class import StrategyBaseClass
+from .ma_in_sequence import MaInSequenceClass
+from .martingale import MartingaleClass
+from .trailing_stop_orders import TrailingStopOrdersClass
+
+def get_strategies(name: str) -> Type[StrategyBaseClass]:
     if name == "ma_in_sequence":
         return MaInSequenceClass
     elif name == "martingale":
