@@ -1,3 +1,3 @@
-from src import strategies, indecators
+from src import strategies, indecators, utilities
 
-__all__ = ["strategies", "indecators"]
+__all__ = ["strategies", "indecators", "utilities"]

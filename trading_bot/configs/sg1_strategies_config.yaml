@@ -1,0 +1,33 @@
+strategies:
+  - name: "martingale1"
+    type: "martingale"
+    enabled: true
+    config:
+      FirstEntryLotsSize: 0.05
+      LotExponent: 1.2
+      Level1PipsStep: 30
+      Level2PipsStep: 60
+      Level3PipsStep: 120
+      Level4PipsStep: 200
+      Level5PipsStep: 360
+      Level6PipsStep: 500
+      Level7PipsStep: 750
+      SLInLevel: 9
+      TotalLevels: 8
+      frequency_in_sec: 60
+  - name: "ma_in_sequence"
+    type: "ma_in_sequence"
+    enabled: true
+    config:
+      frequency_in_sec: 60
+  - name: "trailing_stop_orders"
+    type: "trailing_stop_orders"
+    enabled: true
+    config:
+      frequency_in_sec: 60
+      stop_loss_in_fix_dollars: 0
+      trailing_start_in_dollars: 1
+      trailing_distance_in_dollars: 1
+      breakeven_start_in_dollars: 0
+      breakeven_distance_in_dollars: 0
+      take_profit_in_dollars: 10

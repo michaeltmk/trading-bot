@@ -21,6 +21,7 @@ class MartingaleInputModel(StrategyInputBaseModel):
     indecators: MartingaleIndecatorsModel
 
 class MartingaleClass(StrategyBaseClass):
+    config: MartingaleConfigModel
     def __init__(self, config: dict):
         self.config = MartingaleConfigModel(**config)
         # define the strategy parameters

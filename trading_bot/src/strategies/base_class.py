@@ -46,6 +46,7 @@ class StrategyInputBaseModel(BaseModel):
     price: float
 
 class StrategyBaseClass():
+    config: StrategyConfigBaseModel
     def __init__(self, config):
         self.config = StrategyConfigBaseModel(**config)
         self.indecators = {} # should be defined in the strategy class

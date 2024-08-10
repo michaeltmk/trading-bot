@@ -16,6 +16,7 @@ class TrailingStopOrdersInputModel(StrategyInputBaseModel):
     indecators: TrailingStopOrdersIndecatorsModel
 
 class TrailingStopOrdersClass(StrategyBaseClass):
+    config: TrailingStopOrdersConfigModel
     def __init__(self, config: dict):
         self.config = TrailingStopOrdersConfigModel(**config)
         # define the strategy parameters

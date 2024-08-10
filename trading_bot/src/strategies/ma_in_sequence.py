@@ -16,6 +16,7 @@ class MaInSequenceInputModel(StrategyInputBaseModel):
     indecators: MaInSequenceIndecatorsModel
 
 class MaInSequenceClass(StrategyBaseClass):
+    config: MaInSequenceConfigModel
     def __init__(self, config: dict):
         self.config = MaInSequenceConfigModel(**config)
         # define the strategy parameters
