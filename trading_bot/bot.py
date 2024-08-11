@@ -22,7 +22,7 @@ class signal_generator:
         for strategy in config.strategies:
             if strategy.enabled:
                 loguru.logger.info(f"Appending strategy {strategy.name}")
-                self.append(strategy.name, dict(strategy.config))
+                self.append(strategy.type, dict(strategy.config))
             else:
                 loguru.logger.info(f"Skipping strategy {strategy.name}")
 

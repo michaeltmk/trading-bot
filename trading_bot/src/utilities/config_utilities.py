@@ -1,7 +1,8 @@
 from pydantic import BaseModel
+from pydantic import model_validator
 import yaml
 from typing import List, Any
-from strategies import get_strategies_config_model
+from ..strategies import get_strategies_config_model
 class strategy_config_model(BaseModel):
     name: str
     enabled: bool
