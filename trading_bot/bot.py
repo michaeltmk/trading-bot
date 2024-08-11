@@ -27,8 +27,8 @@ class signal_generator:
                 loguru.logger.info(f"Skipping strategy {strategy.name}")
 
         
-    def append(self, strategy_name: str, config: dict):
-        self.strategies.append(strategies.get_strategies(strategy_name)(config))
+    def append(self, strategy_type: str, config: dict):
+        self.strategies.append(strategies.get_strategies(strategy_type)(config))
 
     def run(self,strategies_inputs: dict):
         for strategy in self.strategies:

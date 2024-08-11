@@ -51,7 +51,7 @@ class StrategyBaseClass():
         self.config = StrategyConfigBaseModel(**config)
         self.indecators = {} # should be defined in the strategy class
 
-    def calculate(self, input: dict) -> StrategyActionBaseModel:
-        input = StrategyInputBaseModel(**input)
+    def calculate(self, input_dict: dict) -> StrategyActionBaseModel:
+        input = StrategyInputBaseModel(**input_dict)
         raise NotImplementedError("calculate method is not implemented")
     
